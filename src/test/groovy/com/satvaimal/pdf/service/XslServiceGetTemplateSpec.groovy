@@ -1,4 +1,4 @@
-package com.satvaimal.pdf
+package com.satvaimal.pdf.service
 
 import spock.lang.Specification
 
