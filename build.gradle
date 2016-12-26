@@ -1,0 +1,40 @@
+buildscript {
+  ext {
+    springBootVersion = '1.4.3.RELEASE'
+  }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+jar {
+  baseName = 'pdf'
+  version = '0.1'
+}
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+  mavenCentral()
+}
+
+
+dependencies {
+  compile("org.springframework.boot:spring-boot-starter-aop")
+  compile("org.springframework.boot:spring-boot-starter-web")
+  compile("org.codehaus.groovy:groovy:2.4.7")
+  testCompile("org.springframework.boot:spring-boot-starter-test") 
+
+  compile 'org.apache.xmlgraphics:fop:1.0'
+  compile 'net.glxn:qrgen:1.4'
+  testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+  testRuntime 'cglib:cglib-nodep:3.1'
+
+}
