@@ -1,4 +1,4 @@
-package com.satvaimal.pdf
+package com.satvaimal.pdf.service.aop
 
 import org.aspectj.lang.annotation.AfterReturning
 import org.aspectj.lang.annotation.AfterThrowing
@@ -13,32 +13,32 @@ import org.springframework.stereotype.Component
 
 @Component
 @Aspect
-class XslServiceGetTemplate {
+class QrServiceGenerate {
 
   final static Logger log = LoggerFactory.getLogger(
-      'com.satvaimal.pdf.XslServiceGetTemplate' )
+      'com.satvaimal.pdf.service.aop.QrServiceGenerate' )
 
   @Pointcut(
-    value='execution(String com.satvaimal.pdf.XslService.getTemplate(..)) && bean(xslService) && args(name)',
-    argNames='name'
+    value='execution(byte[] com.satvaimal.pdf.service.QrService.generate(..)) && bean(qrService) && args(input)',
+    argNames='input'
   )
-  public void getTemplate( String name ) {}
+  public void generate( String input ) {}
 
-  @Before('getTemplate(name)')
-  void before( String name ) {
-    log.info( "<< '{}'", name )
+  @Before('generate(input)')
+  void before( String input ) {
+    log.info( "<< input:{}", input )
   }// End of method
 
   @AfterReturning(
-    pointcut='getTemplate(String)',
-    returning='xsl'
+    pointcut='generate(String)',
+    returning='qr'
   )
-  void afterReturning( String xsl ) {
-    log.info( ">> {} B", xsl?.size() )
+  void afterReturning( byte[] qr ) {
+    log.info( ">> qr:{} B", qr?.size() )
   }// End of method
 
   @AfterThrowing(
-    pointcut='getTemplate(String)',
+    pointcut='generate(String)',
     throwing='e'
   )
   void afterThrowing( Exception e ) {

@@ -1,4 +1,6 @@
-package com.satvaimal.pdf
+package com.satvaimal.pdf.controller
+
+import com.satvaimal.pdf.service.PdfService
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

@@ -11,7 +11,7 @@
     </encoder>
   </appender>
 
-  <logger name="com.satvaimal.pdf" level="INFO"/>
+  <logger name="com.satvaimal.pdf.service.aop" level="INFO"/>
 
   <root level="INFO">
     <appender-ref ref="FILE" />

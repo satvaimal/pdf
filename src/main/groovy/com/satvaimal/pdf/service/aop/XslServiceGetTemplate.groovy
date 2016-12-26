@@ -1,4 +1,4 @@
-package com.satvaimal.pdf
+package com.satvaimal.pdf.service.aop
 
 import org.aspectj.lang.annotation.AfterReturning
 import org.aspectj.lang.annotation.AfterThrowing
@@ -13,32 +13,32 @@ import org.springframework.stereotype.Component
 
 @Component
 @Aspect
-class PdfServiceGetFromXml {
+class XslServiceGetTemplate {
 
   final static Logger log = LoggerFactory.getLogger(
-      'com.satvaimal.pdf.PdfServiceGetFromXml' )
+      'com.satvaimal.pdf.service.aop.XslServiceGetTemplate' )
 
   @Pointcut(
-    value='execution(byte[] com.satvaimal.pdf.PdfService.getFromXml(..)) && bean(pdfService) && args(xml, templateName)',
-    argNames='xml, templateName'
+    value='execution(String com.satvaimal.pdf.service.XslService.getTemplate(..)) && bean(xslService) && args(name)',
+    argNames='name'
   )
-  public void getFromXml( String xml, String templateName ) {}
+  public void getTemplate( String name ) {}
 
-  @Before('getFromXml(xml, templateName)')
-  void before( String xml, String templateName ) {
-    log.info( "<< {} B, '{}'", xml?.size(), templateName )
+  @Before('getTemplate(name)')
+  void before( String name ) {
+    log.info( "<< '{}'", name )
   }// End of method
 
   @AfterReturning(
-    pointcut='getFromXml(String, String)',
-    returning='pdf'
+    pointcut='getTemplate(String)',
+    returning='xsl'
   )
-  void afterReturning( byte[] pdf ) {
-    log.info( ">> {} B", pdf?.size() )
+  void afterReturning( String xsl ) {
+    log.info( ">> {} B", xsl?.size() )
   }// End of method
 
   @AfterThrowing(
-    pointcut='getFromXml(String, String)',
+    pointcut='getTemplate(String)',
     throwing='e'
   )
   void afterThrowing( Exception e ) {
